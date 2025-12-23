@@ -26,9 +26,9 @@ const urlConfig = {
       admin: process.env.ADMIN_URL || 'https://staging-admin.yourdomain.com'
     },
     production: {
-      backend: process.env.BACKEND_URL || 'https://api.yourdomain.com',
-      frontend: process.env.FRONTEND_URL || 'https://yourdomain.com',
-      admin: process.env.ADMIN_URL || 'https://admin.yourdomain.com'
+      backend: process.env.BACKEND_URL || 'https://backend.citybells.in',
+      frontend: process.env.FRONTEND_URL || 'https://app.citybells.in',
+      admin: process.env.ADMIN_URL || 'https://admin.citybells.in'
     }
   },
 
@@ -62,10 +62,16 @@ const urlConfig = {
   customDomains: process.env.CUSTOM_DOMAINS
     ? process.env.CUSTOM_DOMAINS.split(',').map(domain => domain.trim())
     : [
-      'https://your-custom-domain.com',
-      'https://www.your-custom-domain.com',
-      'https://app.yourdomain.com',
-      'https://admin.yourdomain.com'
+      'https://app.citybells.in',
+      'http://app.citybells.in',
+      'https://backend.citybells.in',
+      'http://backend.citybells.in',
+      'https://admin.citybells.in',
+      'http://admin.citybells.in',
+      'https://partner.citybells.in',
+      'http://partner.citybells.in',
+      'https://rider.citybells.in',
+      'http://rider.citybells.in'
     ],
 
   // Third-party service domains
