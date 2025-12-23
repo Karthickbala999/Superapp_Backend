@@ -1,0 +1,9 @@
+OrderID: 69315cfc43d43c5546d6e541
+OrderNumber: ORD-1764842748846-42ew3fcg1
+UserID: 68678c6f2ccb87d7ca07fd6e
+Shipping_Name_Field: undefined
+Shipping_Full: {"address_line1":"123 Main Street","city":"Mumbai","state":"Maharashtra","country":"India","pincode":"400001","phone":"+91 9876543210"}
+Billing_Name_Field: N/A
+CustomerNameSnapshot: undefined
+User_Name: Ajaykrishnan
+User_Email: admin03@example.com

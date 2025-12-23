@@ -1,0 +1,22 @@
+2025-12-15T10:17:34.371Z - --- Verify OTP Request Started ---
+2025-12-15T10:17:34.371Z - Phone: +919347300198, OTP: 123456
+2025-12-15T10:17:34.396Z - Partner found: No
+2025-12-15T10:17:34.396Z - Creating new partner...
+2025-12-15T10:17:34.403Z - ❌ Verify OTP error: Partner validation failed: pincode: Path `pincode` is required., state: Path `state` is required., city: Path `city` is required., address: Path `address` is required., email: Path `email` is required., status: `active` is not a valid enum value for path `status`. 
+ ValidationError: Partner validation failed: pincode: Path `pincode` is required., state: Path `state` is required., city: Path `city` is required., address: Path `address` is required., email: Path `email` is required., status: `active` is not a valid enum value for path `status`.
+    at Document.invalidate (C:\Users\THILOCIGAN\Documents\super_app-main_2\super_app-main\super_app-main 1\node-backend\node_modules\mongoose\lib\document.js:3354:32)
+    at C:\Users\THILOCIGAN\Documents\super_app-main_2\super_app-main\super_app-main 1\node-backend\node_modules\mongoose\lib\document.js:3115:17
+    at C:\Users\THILOCIGAN\Documents\super_app-main_2\super_app-main\super_app-main 1\node-backend\node_modules\mongoose\lib\schemaType.js:1410:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:84:11)
+2025-12-15T10:19:46.414Z - --- Verify OTP Request Started ---
+2025-12-15T10:19:46.414Z - Phone: +919606456856, OTP: 123456
+2025-12-15T10:19:46.459Z - Partner found: No
+2025-12-15T10:19:46.460Z - Creating new partner...
+2025-12-15T10:19:46.537Z - ✅ Auto-registered new partner: 693fe0c288a688f3ac06f7b4
+2025-12-15T10:19:46.630Z - User found: No
+2025-12-15T10:19:46.631Z - Creating new user...
+2025-12-15T10:19:46.791Z - ✅ Created User for partner: 693fe0c288a688f3ac06f7b7
+2025-12-15T10:19:46.952Z - ServicePartner found: No
+2025-12-15T10:19:46.953Z - 🔍 Searching for existing ServicePartner for phone: +919606456856
+2025-12-15T10:19:47.035Z - ✅ Linked existing ServicePartner 693aaf2c31143127b5280e7e to user 693fe0c288a688f3ac06f7b7
+2025-12-15T10:19:47.038Z - Token generated successfully

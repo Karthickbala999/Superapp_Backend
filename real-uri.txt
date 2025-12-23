@@ -1,0 +1,1 @@
+mongodb+srv://superapp_admin:superapp_admin%40740@cluster0.gtmzerf.mongodb.net/superapp_db?retrywrites=true&w=majority&appName=Cluster0

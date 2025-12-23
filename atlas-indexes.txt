@@ -1,0 +1,36 @@
+Connected to Atlas DB.
+
+--- Indexes for users ---
+_id_: {"_id":1}
+email_1: {"email":1}
+role_1: {"role":1}
+status_1: {"status":1}
+role_id_1: {"role_id":1}
+location.coordinates_2dsphere: {"location.coordinates":"2dsphere"}
+
+--- Indexes for partners ---
+_id_: {"_id":1}
+status_1: {"status":1}
+phoneNumber_1: {"phoneNumber":1}
+email_1: {"email":1}
+city_1_state_1: {"city":1,"state":1}
+serviceCategories_1: {"serviceCategories":1}
+isAvailable_1: {"isAvailable":1}
+
+--- Indexes for servicepartners ---
+_id_: {"_id":1}
+user_id_1: {"user_id":1}
+status_1: {"status":1}
+verification_status_1: {"verification_status":1}
+business_name_1: {"business_name":1}
+personal_info.email_1: {"personal_info.email":1}
+application_id_1: {"application_id":1}
+partner_code_1: {"partner_code":1}
+personal_info.phone_1: {"personal_info.phone":1}
+business_info.business_type_1: {"business_info.business_type":1}
+user_1: {"user":1}
+categories_1: {"categories":1}
+serviceAreas.city_1: {"serviceAreas.city":1}
+isVerified_1: {"isVerified":1}
+rating_-1: {"rating":-1}
+isAvailable_1: {"isAvailable":1}

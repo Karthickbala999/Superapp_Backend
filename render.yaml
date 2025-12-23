@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: superapp-backend
+    env: node
+    repo: https://github.com/your-username/super-app-repo  # Replace with your GitHub repo
+    rootDir: super_app-main/super_app-main_1/node-backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: MONGODB_URI
+        sync: false  # Set this in Render dashboard
+      - key: JWT_SECRET
+        sync: false  # Set this in Render dashboard
+      - key: JWT_EXPIRE
+        value: 30d
+      - key: RAZORPAY_KEY_ID
+        sync: false  # Set this in Render dashboard
+      - key: RAZORPAY_KEY_SECRET
+        sync: false  # Set this in Render dashboard
+      - key: CORS_ORIGIN
+        value: https://superapp-frontend.onrender.com,https://urban-partner-app.onrender.com
+    plan: free
+    autoDeploy: true

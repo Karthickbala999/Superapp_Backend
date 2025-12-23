@@ -1,0 +1,12 @@
+--- START FIX ---
+Connected to DB
+Target User: Thilocigan (693b13e17e2c9d023bf08277)
+Booking Found: USR1765950059831, Partner ID: 694245e34b408f3b601eba43
+Current Partner State:
+  ID: 694245e34b408f3b601eba43
+  Name: Vinoth
+  Linked User: 694268c79c5704d889f08b06
+  Current Linked User Name: Partner 3759
+--- APPLYING FIX ---
+✅ Partner restored successfully to Thilocigan!
+New Partner State: Name=Thilocigan, User=Thilocigan

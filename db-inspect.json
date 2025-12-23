@@ -1,0 +1,73 @@
+{
+  "partners": [
+    {
+      "id": "693bcd642576a8ea6c34daa2",
+      "phone": "+916352410789",
+      "name": "Karthick Bala",
+      "created": "2025-12-12T08:08:04.076Z",
+      "status": "pending"
+    },
+    {
+      "id": "693bc16a2576a8ea6c34d451",
+      "phone": "+916369528932",
+      "name": "Karthick Bala",
+      "created": "2025-12-12T07:16:58.642Z",
+      "status": "pending"
+    },
+    {
+      "id": "693aaffad722c0b3bc6b4dfd",
+      "phone": "+918453215321",
+      "name": "bala",
+      "created": "2025-12-11T11:50:18.619Z",
+      "status": "approved"
+    },
+    {
+      "id": "693aabf1d722c0b3bc6b4d60",
+      "phone": "+916512354853",
+      "name": "Dinesh",
+      "created": "2025-12-11T11:33:05.609Z",
+      "status": "pending"
+    },
+    {
+      "id": "693aa03ac02fa49db876c254",
+      "phone": "+917845235347",
+      "name": "Thilocigan",
+      "created": "2025-12-11T10:43:06.741Z",
+      "status": "approved"
+    }
+  ],
+  "servicePartners": [
+    {
+      "id": "693bc8628d607265030c0c21",
+      "user": "693bc8618d607265030c0c1d",
+      "businessName": "Dinesh",
+      "status": "active",
+      "isVerified": false,
+      "created": "2025-12-12T07:46:42.060Z"
+    },
+    {
+      "id": "693aaffbd722c0b3bc6b4e04",
+      "user": "693aaffad722c0b3bc6b4e00",
+      "businessName": "bala",
+      "status": "active",
+      "isVerified": true,
+      "created": "2025-12-11T11:50:19.297Z"
+    },
+    {
+      "id": "693aaf2c31143127b5280e7e",
+      "user": "693b13e17e2c9d023bf08277",
+      "businessName": "Thilocigan",
+      "status": "active",
+      "isVerified": true,
+      "created": "2025-12-11T11:46:52.384Z"
+    },
+    {
+      "id": "693aa4a611c43bdf5f26346a",
+      "user": "6867cbe550ac19fe2cf4e87b",
+      "businessName": "Dilip R",
+      "status": "active",
+      "isVerified": true,
+      "created": "2025-12-11T11:01:58.027Z"
+    }
+  ]
+}

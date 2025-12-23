@@ -1,0 +1,26 @@
+Connected to Atlas MongoDB
+
+--- Recent Partners (Mobile App) ---
+ID: 693aabf1d722c0b3bc6b4d60
+Name: Dinesh, Phone: +916512354853, Status: pending
+Created: Thu Dec 11 2025 17:03:05 GMT+0530 (India Standard Time)
+---
+ID: 693aaa4155e6932406c4de00
+Name: Dinesh, Phone: +918546254565, Status: pending
+Created: Thu Dec 11 2025 16:55:53 GMT+0530 (India Standard Time)
+---
+ID: 693aa83e55e6932406c4ddd3
+Name: sanjay, Phone: +916365325241, Status: pending
+Created: Thu Dec 11 2025 16:47:18 GMT+0530 (India Standard Time)
+---
+
+--- Recent ServicePartners (Admin Panel) ---
+ID: 693aa4a611c43bdf5f26346a
+BusinessName: Dilip R, Type: individual
+User ID: 6867cbe550ac19fe2cf4e87b
+Is Verified: true
+Created: Thu Dec 11 2025 16:31:58 GMT+0530 (India Standard Time)
+---
+
+Checking sync for latest partner: Dinesh (+916512354853)
+❌ User record NOT FOUND for this phone number.

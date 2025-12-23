@@ -1,0 +1,44 @@
+{
+  "name": "superapp-backend",
+  "version": "1.0.0",
+  "description": "Node.js backend for Super App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node seed-all.js",
+    "seed:users": "node src/database/seeders/seed-admin-users-mongo.js",
+    "seed:categories": "node src/database/seeders/seed-categories-mongo.js",
+    "seed:brands": "node src/database/seeders/seed-brands-mongo.js",
+    "seed:products": "node src/database/seeders/seed-products-mongo.js",
+    "seed:orders": "node src/database/seeders/seed-orders-mongo.js",
+    "seed:hotels": "node src/database/seeders/seed-hotels-mongo.js",
+    "cleanup:bookings": "node src/scripts/cleanup-pending-bookings.js",
+    "fix:bookings": "node src/scripts/fix-existing-bookings.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.13.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.0.1",
+    "form-data": "^4.0.5",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.16.1",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.2",
+    "razorpay": "^2.9.6",
+    "react-toastify": "^11.0.5",
+    "sharp": "^0.34.2",
+    "slugify": "^1.6.6",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,6 @@
+Connected to MongoDB
+
+--- Collections ---
+users: 0 docs
+partners: 0 docs
+servicepartners: 0 docs
