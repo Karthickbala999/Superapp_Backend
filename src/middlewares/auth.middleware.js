@@ -20,16 +20,8 @@ exports.protect = async (req, res, next) => {
       });
     }
 
-    // Temporary demo token bypass for development
-    if (token === 'demo-token') {
-      req.user = {
-        id: '68678c6f2ccb87d7ca07fd6e', // Valid ObjectId for demo user with existing rides
-        name: 'Demo User',
-        email: 'demo@example.com',
-        role: 'admin'
-      };
-      return next();
-    }
+    // Demo token bypass removed for security
+    // if (token === 'demo-token') { ... }
 
     try {
       // Verify token

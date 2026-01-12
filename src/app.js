@@ -149,8 +149,13 @@ const gcartRoutes = require('./routes/gcart.routes');
 app.use('/api/gcart', gcartRoutes);
 
 
-// ✅ Serve uploaded files from the 'uploads' directory (not 'public/uploads')
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+// ✅ Serve uploaded files from the 'uploads' directory with caching
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads'), {
+  maxAge: '1d', // Cache for 1 day
+  setHeaders: (res, path) => {
+    res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
+  }
+}));
 
 // ✅ API Routes
 app.use('/api/auth', authRoutes);
