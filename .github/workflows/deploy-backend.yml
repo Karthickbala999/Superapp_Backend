@@ -1,0 +1,36 @@
+name: Deploy Superapp Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout backend code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST_BACKEND }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY_BACKEND }}
+          port: 22
+          script: |
+            echo "Connected to EC2 Backend"
+            
+            cd /home/ec2-user/Superapp_Backend
+            git pull origin main
+
+            # Install dependencies
+            npm install
+
+            # Restart backend (assuming pm2)
+            pm2 stop all || true
+            pm2 start index.js --name superapp-backend
+
+            echo "Backend deployment complete"
