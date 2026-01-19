@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code from GitHub
+      # 1️⃣ Checkout code
       - name: Checkout backend code
         uses: actions/checkout@v4
 
-      # Step 2: Deploy to EC2 via SSH
-      - name: Deploy to EC2 Backend
+      # 2️⃣ Prepare EC2 backend folder
+      - name: Prepare EC2 backend folder
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST_BACKEND }}
@@ -24,14 +24,10 @@ jobs:
           port: 22
           script: |
             echo "Connected to EC2 Backend"
-
-            # Remove old backend folder (optional)
             rm -rf /home/ec2-user/superapp_backend
-
-            # Recreate backend folder
             mkdir -p /home/ec2-user/superapp_backend
 
-      # Step 3: Copy backend files from Actions runner to EC2
+      # 3️⃣ Copy backend files to EC2
       - name: Copy backend files to EC2
         uses: appleboy/scp-action@master
         with:
@@ -39,10 +35,10 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_KEY_BACKEND }}
           port: 22
-          source: "./"                  # current repo root (all backend code)
+          source: "./"
           target: "/home/ec2-user/superapp_backend"
 
-      # Step 4: Install dependencies and restart backend
+      # 4️⃣ Install dependencies and restart backend with PM2
       - name: Install & Restart Backend
         uses: appleboy/ssh-action@v1
         with:
@@ -53,6 +49,13 @@ jobs:
           script: |
             cd /home/ec2-user/superapp_backend || exit 1
             npm install || exit 1
+
+            # Stop existing PM2 process if running
             pm2 stop superapp-backend || true
-            pm2 start index.js --name superapp-backend || exit 1
-            echo "Backend deployment complete"
+            pm2 delete superapp-backend || true
+
+            # Start backend with correct entry file
+            pm2 start server.js --name superapp-backend
+            pm2 save
+
+            echo "Backend deployment complete ✅"
