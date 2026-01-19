@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code from GitHub
       - name: Checkout backend code
         uses: actions/checkout@v4
 
-      - name: Deploy to EC2 via SSH
+      # Step 2: Deploy to EC2 via SSH
+      - name: Deploy to EC2 Backend
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST_BACKEND }}
@@ -22,18 +24,35 @@ jobs:
           port: 22
           script: |
             echo "Connected to EC2 Backend"
-            
-            # Use the correct folder (case-sensitive)
+
+            # Remove old backend folder (optional)
+            rm -rf /home/ec2-user/superapp_backend
+
+            # Recreate backend folder
+            mkdir -p /home/ec2-user/superapp_backend
+
+      # Step 3: Copy backend files from Actions runner to EC2
+      - name: Copy backend files to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_BACKEND }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY_BACKEND }}
+          port: 22
+          source: "./"                  # current repo root (all backend code)
+          target: "/home/ec2-user/superapp_backend"
+
+      # Step 4: Install dependencies and restart backend
+      - name: Install & Restart Backend
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST_BACKEND }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY_BACKEND }}
+          port: 22
+          script: |
             cd /home/ec2-user/superapp_backend || exit 1
-            
-            # Pull latest code
-            git pull origin main || exit 1
-
-            # Install dependencies
             npm install || exit 1
-
-            # Restart backend with PM2
             pm2 stop superapp-backend || true
             pm2 start index.js --name superapp-backend || exit 1
-
             echo "Backend deployment complete"
