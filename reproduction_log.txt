@@ -1,0 +1,8 @@
+=== Grocery Payment Flow Diagnostics ===
+2026-01-23T13:03:40.806Z - Starting diagnostics
+✓ Razorpay Keys match format
+✓ Razorpay API reachable
+✓ User registered successfully
+✓ Grocery Order Created: 697371ae12c3d19550417f4a (Amount: ₹200)
+✓ Payment Order Created: order_S7KVU6gqxop7us
+SUCCESS: Backend payment initialization flow validates correctly.
