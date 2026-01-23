@@ -54,6 +54,9 @@ exports.getUserProfile = async (req, res) => {
 exports.updateUserProfile = async (req, res) => {
   try {
     const {
+      name,
+      email,
+      phone,
       address_line1,
       address_line2,
       city,
@@ -62,6 +65,38 @@ exports.updateUserProfile = async (req, res) => {
       pincode
     } = req.body;
 
+    console.log('ANTIGRAVITY_DEBUG: updateUserProfile called');
+    console.log('ANTIGRAVITY_DEBUG: req.body:', req.body);
+    console.log('ANTIGRAVITY_DEBUG: req.user.id:', req.user.id);
+
+    // 1. Update Core User Data (Name, Email, Phone)
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Check email uniqueness if changed
+    if (email && email !== user.email) {
+      const emailExists = await User.findOne({ email });
+      if (emailExists) {
+        return res.status(400).json({
+          success: false,
+          message: 'Email already exists'
+        });
+      }
+    }
+
+    // Update user fields
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (phone) user.phone = phone;
+
+    await user.save();
+
+    // 2. Update Extended Profile Data
     // Find existing profile
     let profile = await UserProfile.findOne({ user_id: req.user.id });
 
@@ -119,6 +154,13 @@ exports.updateUserProfile = async (req, res) => {
 
     // Format response to match frontend expectations
     const profileData = {
+      // User data
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+
+      // Profile data
       address_line1: profile.address || '',
       address_line2: address_line2 || '', // Store in a note or separate field if needed
       city: profile.city || '',
@@ -157,7 +199,7 @@ exports.deleteProfilePicture = async (req, res) => {
 
     const imagePath = profile.avatar || profile.profile_picture;
     const fullImagePath = path.join(__dirname, '..', '..', imagePath);
-    
+
     if (fs.existsSync(fullImagePath)) {
       fs.unlinkSync(fullImagePath);
     }
@@ -167,7 +209,7 @@ exports.deleteProfilePicture = async (req, res) => {
       profile.profile_picture = null;
     }
     await profile.save();
-    
+
     res.json({
       success: true,
       message: 'Profile picture deleted successfully'
