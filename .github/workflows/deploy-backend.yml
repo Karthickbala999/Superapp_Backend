@@ -1,0 +1,61 @@
+name: Deploy Superapp Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout backend code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Prepare EC2 backend folder
+      - name: Prepare EC2 backend folder
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST_BACKEND }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY_BACKEND }}
+          port: 22
+          script: |
+            echo "Connected to EC2 Backend"
+            rm -rf /home/ec2-user/superapp_backend
+            mkdir -p /home/ec2-user/superapp_backend
+
+      # 3️⃣ Copy backend files to EC2
+      - name: Copy backend files to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_BACKEND }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY_BACKEND }}
+          port: 22
+          source: "./"
+          target: "/home/ec2-user/superapp_backend"
+
+      # 4️⃣ Install dependencies and restart backend with PM2
+      - name: Install & Restart Backend
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST_BACKEND }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY_BACKEND }}
+          port: 22
+          script: |
+            cd /home/ec2-user/superapp_backend || exit 1
+            npm install || exit 1
+
+            # Stop existing PM2 process if running
+            pm2 stop superapp-backend || true
+            pm2 delete superapp-backend || true
+
+            # Start backend with correct entry file
+            pm2 start server.js --name superapp-backend
+            pm2 save
+
+            echo "Backend deployment complete ✅"
