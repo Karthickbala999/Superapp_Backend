@@ -27,7 +27,7 @@ const urlConfig = {
     },
     production: {
       backend: process.env.BACKEND_URL || 'https://super-app-0ofo.onrender.com',
-      frontend: process.env.FRONTEND_URL || 'https://app.citybells.in',
+      frontend: process.env.FRONTEND_URL || 'https://superapp.citybells.in',
       admin: process.env.ADMIN_URL || 'https://admin.citybells.in'
     }
   },
@@ -65,6 +65,8 @@ const urlConfig = {
     : [
       'https://app.citybells.in',
       'http://app.citybells.in',
+      'https://superapp.citybells.in',
+      'http://superapp.citybells.in',
       'https://backend.citybells.in',
       'http://backend.citybells.in',
       'https://admin.citybells.in',
