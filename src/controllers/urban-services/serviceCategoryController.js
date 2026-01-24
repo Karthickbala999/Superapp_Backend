@@ -122,7 +122,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
     });
   }
   
-  await category.remove();
+  await ServiceCategory.findByIdAndDelete(req.params.id);
   
   res.json({
     success: true,
