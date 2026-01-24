@@ -67,6 +67,12 @@ const permissionRoutes = require('./routes/permission.routes');
 
 const app = express();
 
+// ✅ Request logging for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('Origin')}`);
+  next();
+});
+
 // ✅ Comprehensive CORS configuration using URL config system
 const corsOptions = {
   origin: function (origin, callback) {
