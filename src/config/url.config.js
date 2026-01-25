@@ -16,17 +16,17 @@ const urlConfig = {
   // Base URLs for different environments
   baseUrls: {
     development: {
-      backend: process.env.BACKEND_URL || 'http://localhost:3000',
+      backend: process.env.REACT_APP_API_URL || 'http://backend.citybells.in/',
       frontend: process.env.FRONTEND_URL || 'http://localhost:5000',
       admin: process.env.ADMIN_URL || 'http://localhost:3001'
     },
     staging: {
-      backend: process.env.BACKEND_URL || 'https://staging-api.yourdomain.com',
+      backend: process.env.REACT_APP_API_URL || 'http://backend.citybells.in/',
       frontend: process.env.FRONTEND_URL || 'https://staging.yourdomain.com',
       admin: process.env.ADMIN_URL || 'https://staging-admin.yourdomain.com'
     },
     production: {
-      backend: process.env.BACKEND_URL || 'https://super-app-0ofo.onrender.com',
+      backend: process.env.REACT_APP_API_URL || 'http://backend.citybells.in/',
       frontend: process.env.FRONTEND_URL || 'https://superapp.citybells.in',
       admin: process.env.ADMIN_URL || 'https://admin.citybells.in'
     }
