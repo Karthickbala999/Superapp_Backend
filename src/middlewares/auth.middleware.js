@@ -64,7 +64,7 @@ exports.protect = async (req, res, next) => {
       console.log('🚫 Auth Middleware: Token verification failed:', error.message);
       return res.status(401).json({
         success: false,
-        message: 'Not authorized to access this route (Invalid Token)'
+        message: `Not authorized to access this route (${error.message})`
       });
     }
   } catch (error) {
