@@ -34,13 +34,13 @@ exports.getGroceryOrderById = async (req, res) => {
   try {
     const userId = req.user.id;
     const userRole = req.user.role;
-    
+
     // Build query - admins can access any order, users can only access their own
     const query = { _id: req.params.id };
     if (userRole !== 'admin' && userRole !== 'grocery_admin') {
       query.user_id = userId;
     }
-    
+
     let order = await GroceryOrder.findOne(query)
       .populate({
         path: 'items',
@@ -162,9 +162,9 @@ exports.createGroceryOrder = async (req, res) => {
 
     // Map order to ensure user data is accessible via both user_id and user for frontend compatibility
     const orderObj = createdOrder.toObject ? createdOrder.toObject({ virtuals: true }) : { ...createdOrder };
-    
+
     if (!orderObj.user) orderObj.user = {};
-    
+
     // Prioritize snapshot data we just saved
     if (orderObj.customer_name) {
       orderObj.user.name = orderObj.customer_name;
@@ -291,7 +291,7 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
       if (date_from) query.createdAt.$gte = new Date(date_from);
       if (date_to) query.createdAt.$lte = new Date(date_to);
     }
-    
+
     // Search filter - we'll handle user search after population
     let userQuery = {};
     if (search) {
@@ -307,10 +307,10 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
         { order_number: { $regex: search, $options: 'i' } }
       ];
     }
-    
+
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const total_items = await GroceryOrder.countDocuments(query);
-    
+
     // Build populate options for user_id - only use match if there's a search query
     const userPopulateOptions = {
       path: 'user_id',
@@ -319,7 +319,7 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
     if (search && Object.keys(userQuery).length > 0) {
       userPopulateOptions.match = userQuery;
     }
-    
+
     let orders = await GroceryOrder.find(query)
       .populate({
         path: 'items',
@@ -329,7 +329,7 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(parseInt(limit));
-    
+
     // DEBUG: Log first order to see what we're getting
     if (orders.length > 0) {
       console.log('🔍 DEBUG - First order before mapping:', {
@@ -342,7 +342,7 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
         user_id_email: orders[0].user_id?.email
       });
     }
-    
+
     // Filter out orders where user doesn't match search criteria
     if (search) {
       orders = orders.filter(order => {
@@ -354,11 +354,11 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
         return user && typeof user === 'object' && user._id;
       });
     }
-    
+
     // Map orders to ensure user data is accessible via both user_id and user for frontend compatibility
     orders = orders.map(order => {
       const orderObj = order.toObject ? order.toObject({ virtuals: true }) : { ...order };
-      
+
       // Initialize user object if not present
       if (!orderObj.user) {
         orderObj.user = {};
@@ -373,7 +373,7 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
           phone: orderObj.user_id.phone
         };
       }
-      
+
       // 2. If we have denormalized/snapshot data, allow it to override or fallback
       // The requirement is to show the LATEST data if the user updates their profile.
       // But if we want to show the snapshot, we would prioritize customer_name.
@@ -383,24 +383,24 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
       // BUT if populated data is missing or failed, use snapshot.
       // Wait, if the populated data IS the old value (as user implies), then maybe we should use the snapshot we JUST saved?
       // If we just saved the snapshot from the fetched user, it IS the latest.
-      
+
       if (orderObj.customer_name) {
-         // If we have a snapshot, it might be more reliable for "what was the user when order was created"
-         // But user said "Update profile -> Place Order -> Verify Admin Panel shows updated name".
-         // So if we save the NEW name to snapshot, and display snapshot, it works.
-         orderObj.user.name = orderObj.customer_name;
-         orderObj.user.email = orderObj.customer_email;
-         orderObj.user.phone = orderObj.customer_phone;
+        // If we have a snapshot, it might be more reliable for "what was the user when order was created"
+        // But user said "Update profile -> Place Order -> Verify Admin Panel shows updated name".
+        // So if we save the NEW name to snapshot, and display snapshot, it works.
+        orderObj.user.name = orderObj.customer_name;
+        orderObj.user.email = orderObj.customer_email;
+        orderObj.user.phone = orderObj.customer_phone;
       } else if (orderObj.user_id && typeof orderObj.user_id === 'object') {
-         // Fallback to populated if no snapshot
-         orderObj.user.name = orderObj.user_id.name;
-         orderObj.user.email = orderObj.user_id.email;
-         orderObj.user.phone = orderObj.user_id.phone;
+        // Fallback to populated if no snapshot
+        orderObj.user.name = orderObj.user_id.name;
+        orderObj.user.email = orderObj.user_id.email;
+        orderObj.user.phone = orderObj.user_id.phone;
       }
-      
+
       return orderObj;
     });
-    
+
     // DEBUG: Log first order after mapping
     if (orders.length > 0) {
       console.log('🔍 DEBUG - First order after mapping:', {
@@ -411,7 +411,7 @@ exports.adminGetAllGroceryOrders = async (req, res) => {
         userEmail: orders[0].user?.email
       });
     }
-    
+
     res.json({
       success: true,
       data: orders,
@@ -446,7 +446,7 @@ exports.adminUpdateGroceryOrderStatus = async (req, res) => {
     order.status = status || order.status;
     if (notes) order.notes = notes;
     await order.save();
-    
+
     // Populate the updated order with current user data
     const updatedOrder = await GroceryOrder.findById(id)
       .populate({
@@ -457,7 +457,7 @@ exports.adminUpdateGroceryOrderStatus = async (req, res) => {
         path: 'user_id',
         select: 'name email phone'
       });
-    
+
     // Map order to ensure user data is accessible via both user_id and user for frontend compatibility
     const orderObj = updatedOrder.toObject ? updatedOrder.toObject({ virtuals: true }) : { ...updatedOrder };
     if (orderObj.user_id && typeof orderObj.user_id === 'object' && orderObj.user_id._id) {
@@ -468,7 +468,7 @@ exports.adminUpdateGroceryOrderStatus = async (req, res) => {
         phone: orderObj.user_id.phone
       };
     }
-    
+
     res.json({
       success: true,
       message: 'Grocery order status updated successfully',

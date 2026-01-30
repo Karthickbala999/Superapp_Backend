@@ -67,6 +67,12 @@ const permissionRoutes = require('./routes/permission.routes');
 
 const app = express();
 
+// ✅ Request logging for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('Origin')}`);
+  next();
+});
+
 // ✅ Comprehensive CORS configuration using URL config system
 const corsOptions = {
   origin: function (origin, callback) {
@@ -143,8 +149,13 @@ const gcartRoutes = require('./routes/gcart.routes');
 app.use('/api/gcart', gcartRoutes);
 
 
-// ✅ Serve uploaded files from the 'uploads' directory (not 'public/uploads')
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+// ✅ Serve uploaded files from the 'uploads' directory with caching
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads'), {
+  maxAge: '1d', // Cache for 1 day
+  setHeaders: (res, path) => {
+    res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
+  }
+}));
 
 // ✅ API Routes
 app.use('/api/auth', authRoutes);

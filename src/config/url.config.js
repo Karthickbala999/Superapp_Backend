@@ -16,18 +16,18 @@ const urlConfig = {
   // Base URLs for different environments
   baseUrls: {
     development: {
-      backend: process.env.BACKEND_URL || 'http://localhost:3000',
+      backend: process.env.REACT_APP_API_URL || 'http://backend.citybells.in/',
       frontend: process.env.FRONTEND_URL || 'http://localhost:5000',
       admin: process.env.ADMIN_URL || 'http://localhost:3001'
     },
     staging: {
-      backend: process.env.BACKEND_URL || 'https://staging-api.yourdomain.com',
+      backend: process.env.REACT_APP_API_URL || 'http://backend.citybells.in/',
       frontend: process.env.FRONTEND_URL || 'https://staging.yourdomain.com',
       admin: process.env.ADMIN_URL || 'https://staging-admin.yourdomain.com'
     },
     production: {
-      backend: process.env.BACKEND_URL || 'https://backend.citybells.in',
-      frontend: process.env.FRONTEND_URL || 'https://app.citybells.in',
+      backend: process.env.REACT_APP_API_URL || 'http://backend.citybells.in/',
+      frontend: process.env.FRONTEND_URL || 'https://superapp.citybells.in',
       admin: process.env.ADMIN_URL || 'https://admin.citybells.in'
     }
   },
@@ -39,6 +39,7 @@ const urlConfig = {
       'https://super-app-git-main-kavinilavans-projects.vercel.app',
       'https://super-app-git-qa-kavinilavans-projects.vercel.app',
       'https://super-app-wheat-five.vercel.app',
+      'https://super-app-wh-heat-five.vercel.app',
       'https://super-app-lac.vercel.app',
       'https://super-app-cz4s.vercel.app',
       'https://super-dtqbebf0s-kavinilavans-projects.vercel.app'
@@ -64,6 +65,8 @@ const urlConfig = {
     : [
       'https://app.citybells.in',
       'http://app.citybells.in',
+      'https://superapp.citybells.in',
+      'http://superapp.citybells.in',
       'https://backend.citybells.in',
       'http://backend.citybells.in',
       'https://admin.citybells.in',
