@@ -1,0 +1,27 @@
+﻿--- Starting Auth Middleware Verification ---
+
+Test 1: Testing Invalid Signature...
+≡ƒÜ½ Auth Middleware: Token verification failed: invalid signature
+Response: {
+  "success": false,
+  "message": "Not authorized to access this route (invalid signature)"
+}
+Γ£à PASS: Correctly identified invalid signature
+
+
+Test 2: Testing Expired Token...
+≡ƒÜ½ Auth Middleware: Token verification failed: jwt expired
+Response: {
+  "success": false,
+  "message": "Not authorized to access this route (jwt expired)"
+}
+Γ£à PASS: Correctly identified expired token
+
+
+Test 3: Testing Malformed Token...
+≡ƒÜ½ Auth Middleware: Token verification failed: jwt malformed
+Response: {
+  "success": false,
+  "message": "Not authorized to access this route (jwt malformed)"
+}
+Γ£à PASS: Correctly identified malformed token
