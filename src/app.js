@@ -140,8 +140,7 @@ app.get('/api/health', (req, res) => {
     success: true,
     message: 'Backend is running',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development',
-    debug_check: "ANTIGRAVITY_EDITED_THIS_FILE"
+    environment: process.env.NODE_ENV || 'development'
   });
 });
 

@@ -74,7 +74,8 @@ const urlConfig = {
       'https://partner.citybells.in',
       'http://partner.citybells.in',
       'https://rider.citybells.in',
-      'http://rider.citybells.in'
+      'http://rider.citybells.in',
+      'http://backend.citybells.in'
     ],
 
   // Third-party service domains
